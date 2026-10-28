@@ -78,3 +78,26 @@ def _syn_imu(p, R, skip_ESKF=False):   # set skip_ESKF to False
 This may slightly improve performance (used in our previous work [PNP](https://xinyu-yi.github.io/PNP/)). Note that both versions have modeled the IMU raw signal noise and calibration error, and we recommend using the default setting for its fast speed and comparable effectiveness.
 
 *Note: The author has graduated and currently has limited time to format the codes in the repository. If you encounter any issues or have questions, feel free to open an issue. You may also contact me via the updated email address: yixinyu1999@gmail.com (note that the university email provided in the paper is no longer active after graduation).*
+
+## Symlinks
+
+```bash
+mkdir -p ./data/test_datasets
+mkdir -p ./models
+ln -s ~/smpl/SMPL_python_v.1.0.0/smpl/models/basicmodel_m_lbs_10_207_0_v1.0.0.pkl ./models/SMPL_male.pkl
+ln -s ~/data/pnp_test_datasets/* ./data/test_datasets
+```
+
+## Docker
+
+```bash
+docker build -t global_poser .
+docker run --gpus all --rm -it \
+    -e DISPLAY=$DISPLAY \
+    -e QT_X11_NO_MITSHM=1 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+    -v ".:/app" \
+    -v "$HOME/data:$HOME/data" \
+    -v "$HOME/smpl:$HOME/smpl" \
+    global_poser
+```
