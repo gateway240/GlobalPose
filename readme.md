@@ -95,6 +95,9 @@ docker build -t global_poser .
 docker run --gpus all --rm -it \
     -e DISPLAY=$DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
+    -e LIBGL_ALWAYS_SOFTWARE=1 \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -v $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v ".:/app" \
     -v "$HOME/data:$HOME/data" \

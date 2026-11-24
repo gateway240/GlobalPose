@@ -2,5 +2,6 @@ models
 data/temp
 data/test_datasets
 data/weights.pt
+data/examples
 .idea
 __pycache__/
