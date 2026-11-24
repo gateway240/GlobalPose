@@ -358,6 +358,11 @@ R_fix = torch.stack([
 ]).to(ori.device)
 
 ori = (ori @ R_fix).to(device)
+
+# Remove gravity
+g = 9.8
+acc_raw = -acc_raw / g
+acc_raw = acc_raw + torch.tensor([g, 0., 0.])
 acc_raw = torch.matmul(
     acc_raw.unsqueeze(-2),
     R_fix.unsqueeze(0)
